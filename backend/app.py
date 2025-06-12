@@ -20,6 +20,9 @@ def create_app():
     #import blueprints
     from modules.auth.routes import auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
+    #import gyms blueprint
+    from modules.gyms.routes import gyms_bp
+    app.register_blueprint(gyms_bp, url_prefix='/gyms')
 
     @app.route('/api/health')
     def health():
