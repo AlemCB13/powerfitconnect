@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: powerfitconnect_auth
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - powerfit_network
+
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - POSTGRES_URL=postgresql://postgres:password@db:5432/powerfitconnect_auth
+      - JWT_SECRET_KEY=jwt-secret-development
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app
+    networks:
+      - powerfit_network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - powerfit_network
+
+volumes:
+  postgres_data:
+
+networks:
+  powerfit_network:
+    driver: bridge
