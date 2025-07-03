@@ -1,6 +1,15 @@
 provider "aws" {
   region = "us-east-1"  # Mantiene la región us-east-1
 }
+resource "tls_private_key" "ec2_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "aws_key_pair" "deployer" {
+  key_name   = "powerfitconnect-key"
+  public_key = tls_private_key.ec2_key.public_key_openssh
+}
 
 resource "aws_instance" "example" {
   ami                    = "ami-0c7217cdde317cfec"  # Ubuntu 22.04 LTS en us-east-1
@@ -9,10 +18,16 @@ resource "aws_instance" "example" {
   
   # Grupo de seguridad para SSH
   vpc_security_group_ids = [aws_security_group.allow_ssh.id]
+  key_name               = aws_key_pair.deployer.key_name
   
   tags = {
-    Name = "powerfitconnect-app"
+    Name = "powerfitconnect-app-v1"
   }
+}
+
+output "private_key_pem" {
+    value     = tls_private_key.ec2_key.private_key_pem
+    sensitive = true
 }
 
 # Grupo de seguridad para permitir SSH

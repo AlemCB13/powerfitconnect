@@ -42,9 +42,8 @@ The project follows an evolutionary architecture approach:
 ### Infrastructure
 - **AWS EC2** - Compute instances
 - **AWS RDS** - Managed relational databases
-- **AWS S3** - Object storage
 - **AWS ALB** - Load balancing
-- **AWS SQS** - Message queuing
+- **AWS ASG** - Auto-scaling groups
 
 ### DevOps
 - **Docker** - Containerization

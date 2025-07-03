@@ -23,6 +23,9 @@ def create_app():
     #import gyms blueprint
     from modules.gyms.routes import gyms_bp
     app.register_blueprint(gyms_bp, url_prefix='/gyms')
+    #import memberships blueprint
+    from modules.memberships.routes import membership_bp
+    app.register_blueprint(membership_bp, url_prefix='/memberships')
 
     @app.route('/api/health')
     def health():
