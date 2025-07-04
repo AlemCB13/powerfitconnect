@@ -1,5 +1,5 @@
 from .models import User
-from app import db
+from .extensions import db
 
 def register_user(username, password):
     if User.query.filter_by(username=username).first():
