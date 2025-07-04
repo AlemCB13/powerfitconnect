@@ -1,5 +1,5 @@
 from .models import Gym
-from app import db
+from .extensions import db
 
 def create_gym(name, address, phone=None, description=None):
     gym = Gym(name=name, address=address, phone=phone, description=description)
