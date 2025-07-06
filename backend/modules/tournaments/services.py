@@ -1,5 +1,5 @@
 from .models import Tournament
-from app import db
+from .extensions import db
 from datetime import datetime
 
 def create_tournament(data):
