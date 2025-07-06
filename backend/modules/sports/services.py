@@ -1,5 +1,5 @@
 from .models import Discipline, Exercise, Workout
-from app import db
+from .extensions import db
 
 
 # Discipline services

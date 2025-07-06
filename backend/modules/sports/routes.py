@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from .models import Discipline, Exercise, Workout
-from app import db
+from .extensions import db
 
 sports_bp = Blueprint('sports', __name__)
 
