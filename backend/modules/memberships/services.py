@@ -1,5 +1,5 @@
 from .models import Membership
-from app import db
+from .extensions import db
 import datetime
 
 def create_membership(data):

@@ -1,10 +1,10 @@
 from flask import Flask
 from flask_cors import CORS
-from .routes import gyms_bp
+from .routes import membership_bp
 from .extensions import db, migrate
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///gyms.db'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///memberships.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 def create_app():
@@ -13,7 +13,10 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     CORS(app)
-    app.register_blueprint(gyms_bp, url_prefix='/gyms')
+    app.register_blueprint(membership_bp, url_prefix='/memberships')
     return app
 
 app = create_app()
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
