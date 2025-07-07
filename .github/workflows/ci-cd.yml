@@ -26,6 +26,7 @@ jobs:
           for service in auth gyms memberships sports tournaments; do
             docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${service}-service:${{ github.sha }} .backend/modules/$service
             docker push ${{ secrets.DOCKERHUB_USERNAME }}/${service}-service:${{ github.sha }}
+          done
 
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
