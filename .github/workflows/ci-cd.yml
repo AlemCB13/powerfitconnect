@@ -24,7 +24,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           for service in auth gyms memberships sports tournaments; do
-            docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${service}-service:${{ github.sha }} .backend/modules/$service
+            docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${service}-service:${{ github.sha }} ./backend/modules/$service
             docker push ${{ secrets.DOCKERHUB_USERNAME }}/${service}-service:${{ github.sha }}
           done
 
