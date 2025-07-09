@@ -63,6 +63,8 @@ resource "aws_instance" "service" {
 
   user_data = <<-EOF
     #!/bin/bash
+    exec > /var/log/user-data.log 2>&1
+    set -ex
     apt-get update
     apt-get install -y docker.io git
     systemctl start docker
